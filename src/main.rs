@@ -11,6 +11,7 @@ fn main() {
     let mut player_name = String::new();
 
     // Introduction
+    clearscreen::clear().expect("Failed to clear screen");
     println!("Hello there! Welcome to my Hangman game.");
 
     // Get the player name
@@ -18,11 +19,7 @@ fn main() {
     std::io::stdin().read_line(&mut player_name).expect("Failed to read line");
 
     // Create the game
-    let mut game = Game::new(Player::new(player_name), Phrase::get_random());
-
-    // Instructions
-    println!("Welcome, {}, to my Hangman game.", game.get_player().get_name());
-    println!("The category for today is: {}", game.get_phrase_category());
+    let mut game = Game::new(Player::new(player_name.trim().to_string(), 10), Phrase::get_random());
 
     // Start the game
     game.run();
